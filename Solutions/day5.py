@@ -67,28 +67,21 @@ with open("inputs/day5.txt") as f:
 
 
     maps = [[[int(y) for y in x.split(" ")] for x in line] for line in maps]
+    maps = list(reversed(maps))
 
-    # Maps is now a 3d array of all the different maps,
-    # maps[x] specifies the map i.e. seed-to-soil map
-    # maps[x][y] specifies the line of the map which has the destination, source and range
-    # maps[x][y][z] specifies the destination, source or range
-
-    lowest = 0
-    for pair in seeds:
-        pprint("PAIR: " + str(pair[0]))
-        print(pair)
-        for i in range(pair[0], pair[0]+pair[1]):
-            seed = i
-            val=seed
-            for map in maps:
-                for line in map:
-                    if (line[1] <= val <= line[1] + line[2]):
-                        val = line[0] + val - line[1]
-                        break
-            if (val < lowest or lowest == 0):
-                lowest = val
-    print(lowest)
-    print("--- %s seconds ---" % (time.time() - start_time))
-
-
-# Write a for loop from 28 to 928.
+    match = False
+    i=0
+    while not match:
+        val = i
+        for map in maps:
+            for line in map:
+                if (line[0]<= val < line[0] + line [2]):
+                    val = line[1] + (val - line[0])
+                    break
+        for pair in seeds:
+            if (pair[0] <= val < pair[0] + pair[1]):
+                match = True
+                break
+        if not match:
+            i += 1
+    print(i)
