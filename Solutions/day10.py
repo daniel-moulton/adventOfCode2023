@@ -9,41 +9,41 @@ def findStart(map):
             if (map[y][x] == 'S'):
                 return [y,x]
 
-def howToMove(currPos, tile, tilePos):
-    # currPos & tilePos in form [y, x] to match map
-    # Tile is the current tile
+# def howToMove(currPos, tile, tilePos):
+#     # currPos & tilePos in form [y, x] to match map
+#     # Tile is the current tile
 
-    match tile:
-        case '|':
-            if (currPos[0]<tilePos[0]):
-                return 1,0 # Down
-            else:
-                return -1,0 # Up
-        case '-':
-            if (currPos[1]<tilePos[1]):
-                return 0,1 # Right
-            else:
-                return 0,-1 # Left
-        case 'F':
-            if (currPos[0] == tilePos[0]):
-                return 1,-1 # Down-Left
-            else:
-                return -1,1 # Up-Right
-        case '7':
-            if (currPos[0] == tilePos[0]):
-                return 1,1 # Down-Right
-            else:
-                return -1,-1 # Up-Left
-        case 'J':
-            if (currPos[0] == tilePos[0]):
-                return -1,1 # Up-Right
-            else:
-                return 1,-1 # Down-Left
-        case 'L':
-            if (currPos[0] == tilePos[0]):
-                return -1,-1 # Up-Left
-            else:
-                return 1,1 # Down-Right
+#     match tile:
+#         case '|':
+#             if (currPos[0]<tilePos[0]):
+#                 return 1,0 # Down
+#             else:
+#                 return -1,0 # Up
+#         case '-':
+#             if (currPos[1]<tilePos[1]):
+#                 return 0,1 # Right
+#             else:
+#                 return 0,-1 # Left
+#         case 'F':
+#             if (currPos[0] == tilePos[0]):
+#                 return 1,-1 # Down-Left
+#             else:
+#                 return -1,1 # Up-Right
+#         case '7':
+#             if (currPos[0] == tilePos[0]):
+#                 return 1,1 # Down-Right
+#             else:
+#                 return -1,-1 # Up-Left
+#         case 'J':
+#             if (currPos[0] == tilePos[0]):
+#                 return -1,1 # Up-Right
+#             else:
+#                 return 1,-1 # Down-Left
+#         case 'L':
+#             if (currPos[0] == tilePos[0]):
+#                 return -1,-1 # Up-Left
+#             else:
+#                 return 1,1 # Down-Right
 
 def getNextTilePos(currPos, map, prevTilePos, start=False):
     # Check up down left and right for a tile which we can move to
@@ -97,8 +97,8 @@ with open("Inputs/day10.txt", 'r') as file:
     prevTilePos = startCoords
     for i in range(10):
         tilePos = getNextTilePos(currPos, map, prevTilePos, start=(numMoves==0))
-        moveSteps = howToMove(currPos, map[tilePos[0]][tilePos[1]], tilePos)
-        nextPos = makeMove(map, currPos, moveSteps)
+        # moveSteps = howToMove(currPos, map[tilePos[0]][tilePos[1]], tilePos)
+        nextPos = makeMove(map, currPos, tilePos)
         print("Moving from", currPos, "(", map[currPos[0]][currPos[1]], ") to", nextPos, "(", map[nextPos[0]][nextPos[1]], ") via", map[tilePos[0]][tilePos[1]], "with", moveSteps, "\n")
         path.append(map[currPos[0]][currPos[1]])
         numMoves += 1
